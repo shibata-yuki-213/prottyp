@@ -11,6 +11,7 @@
 #include "sound.h"
 #include "collision.h"
 #include "rhythm.h"
+#include "special.h"
 #include <time.h>
 #include <stdlib.h>
 
@@ -357,7 +358,8 @@ void UninitEnemyBullet()
 //更新処理
 void UpdateEnemyBullet()
 {
-	
+	SPECIAL* sp = GetSpecial();
+
 	int eFreame = GetFreame();
 
 	if (eFreame % 60*1.5 == 0.0f)
@@ -381,7 +383,15 @@ void UpdateEnemyBullet()
 			if (CollisionBB(g_EnemyBulletNomal[i].pos, pPlayer->pos, D3DXVECTOR2(g_EnemyBulletNomal[i].w, g_EnemyBulletNomal[i].h), pPlayer->size))
 			{
 				g_EnemyBulletNomal[i].use = false;
-				pPlayer->hp -= 25.0f;
+				//スペシャルの被ダメ減少
+				if (sp->get_damage_down == true)
+				{
+					pPlayer->hp -= 5.0f;
+				}
+				else
+				{
+					pPlayer->hp -= 25.0f;
+				}
 				g_EnemyBulletNomal[i].pos.y = -10.0f;
 				PlaySound(g_SE_Damage, 0);
 			}
@@ -403,7 +413,14 @@ void UpdateEnemyBullet()
 			if (CollisionBB(g_EnemyBulletLong[k].pos, pPlayer->pos, D3DXVECTOR2(g_EnemyBulletLong[k].w, g_EnemyBulletLong[k].h), pPlayer->size/2))
 			{
 				g_EnemyBulletLong[k].use = false;
-				pPlayer->hp -= 15.0f;
+				if (sp->get_damage_down == true)
+				{
+					pPlayer->hp -= 3.0f;
+				}
+				else
+				{
+					pPlayer->hp -= 15.0f;
+				}
 				g_EnemyBulletLong[k].pos.y = -10.0f;
 				PlaySound(g_SE_Damage, 0);
 			}

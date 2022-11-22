@@ -7,6 +7,7 @@
 #include "enemy.h"
 #include "texture.h"
 #include "sprite.h"
+#include "special.h"
 
 //================================
 //ƒOƒ[ƒoƒ‹•Ï”
@@ -69,11 +70,11 @@ void UpdateBullet()
 					)
 				{
 					if (GetEnemyNum() > 0) {
-						pEnemy->hp -= 90 / (GetEnemyNum() * 1.5);
+						pEnemy->hp -= Damage() / (GetEnemyNum() * 1.5);
 						g_Bullet[i].use = false;
 					}
 					else {
-						pEnemy->hp -= 90;
+						pEnemy->hp -= Damage();
 						g_Bullet[i].use = false;
 					}
 					//if (pEnemy->hp <= 0)
@@ -136,5 +137,23 @@ void SetBullet(D3DXVECTOR2 pos)
 			g_Bullet[i].use = true;
 			return;
 		}
+	}
+}
+
+int Damage()
+{
+	SPECIAL* sp = GetSpecial();
+
+	int damage;
+
+	if (sp->damage_up == true)
+	{
+		damage = 450;
+		return damage;
+	}
+	else
+	{
+		damage = 90;
+		return damage;
 	}
 }
