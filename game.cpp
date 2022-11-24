@@ -91,7 +91,6 @@ void UpdateGame(void)
 	{
 		SceneTransition(SCENE_TITLE);
 	}
-<<<<<<< HEAD
 	UpdateRhythm();
 
 	if (GetFreame() > 120) {
@@ -99,23 +98,6 @@ void UpdateGame(void)
 		if (!MusicEnd()) {
 			UpdateBG();
 			UpdateLane();
-
-			UpdatePlayer();
-			UpdateBullet();
-			UpdateEnemy();
-			UpdateEnemyBullet();
-			UpdateScore();
-			UpdateCombo();
-		}
-		else {
-			SceneTransition(SCENE_RESULT);
-		}
-=======
-
-	 
-	if (!MusicEnd()) {
-		UpdateBG();
-		UpdateLane();
 
 		UpdatePlayer();
 		UpdateBullet();
@@ -128,9 +110,7 @@ void UpdateGame(void)
 	}
 	else {
 		SceneTransition(SCENE_RESULT);
->>>>>>> スペシャルを追加しました
 	}
-	
 
 }
 
